@@ -1,0 +1,36 @@
+/* =========================================================
+   ANIMATIONS
+   Tasteful, restrained motion. Scroll reveal + hover states.
+   ========================================================= */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children slightly when a group reveals together */
+.about-preview__grid [data-reveal]:nth-child(2) { transition-delay: 0.08s; }
+.peaks .peak { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+.peaks.is-visible .peak { opacity: 1; transform: translateY(0); }
+.peaks.is-visible .peak:nth-child(1) { transition-delay: 0s; }
+.peaks.is-visible .peak:nth-child(2) { transition-delay: 0.06s; }
+.peaks.is-visible .peak:nth-child(3) { transition-delay: 0.12s; }
+.peaks.is-visible .peak:nth-child(4) { transition-delay: 0.18s; }
+.peaks.is-visible .peak:nth-child(5) { transition-delay: 0.24s; }
+.peaks.is-visible .peak:nth-child(6) { transition-delay: 0.30s; }
+.peaks.is-visible .peak:nth-child(7) { transition-delay: 0.36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal], .peaks .peak {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .horizon-stroke { stroke-dashoffset: 0 !important; animation: none !important; }
+  .hero__glow, .scroll-indicator__flame { animation: none !important; }
+}

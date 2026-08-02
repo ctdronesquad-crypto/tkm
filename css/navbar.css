@@ -1,0 +1,83 @@
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  height: var(--nav-h);
+  display: flex; align-items: center;
+  background: transparent;
+  transition: background 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), height 0.35s var(--ease-out);
+}
+
+.navbar.is-scrolled {
+  background: rgba(7, 11, 20, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(212,175,55,0.15);
+  height: 72px;
+}
+
+.navbar__inner {
+  width: 100%; max-width: var(--container-w); margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+
+.navbar__brand { display: flex; align-items: center; gap: 10px; }
+.navbar__flame { color: var(--color-gold); display: flex; }
+.navbar__wordmark {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--color-white);
+  display: flex; flex-direction: column; line-height: 1.1;
+}
+.navbar__wordmark-sub { font-family: var(--font-body); font-weight: 500; font-size: 0.62rem; letter-spacing: 0.06em; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+.navbar__wordmark--footer { color: var(--color-white); font-size: 1.6rem; margin-bottom: 12px; display: block; }
+
+.navbar__nav { display: flex; }
+.navbar__list { display: flex; align-items: center; gap: 30px; }
+.navbar__list > li { position: relative; }
+.navbar__list a {
+  color: rgba(255,255,255,0.86); font-weight: 600; font-size: 0.92rem; padding: 8px 0; position: relative;
+}
+.navbar__list a::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--color-gold);
+  transition: width 0.25s var(--ease-out);
+}
+.navbar__list a:hover::after, .navbar__list a:focus-visible::after { width: 100%; }
+.navbar__list a:hover { color: var(--color-white); }
+
+.navbar__mega-trigger { display: none; } /* mountains.html link acts as primary; mega trigger label hidden, first <a> used for label + link */
+.has-mega:hover .mega-menu, .has-mega:focus-within .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.mega-menu {
+  position: absolute; top: calc(100% + 18px); left: 50%; transform: translateX(-50%) translateY(8px);
+  background: var(--color-white); border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+  display: flex; gap: 32px; padding: 28px 32px; min-width: 460px;
+  opacity: 0; visibility: hidden; transition: all 0.25s var(--ease-out);
+}
+.mega-menu__col { display: flex; flex-direction: column; gap: 10px; }
+.mega-menu__label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-blue); font-weight: 700; margin: 0 0 4px; }
+.mega-menu a { color: var(--color-navy); font-size: 0.88rem; font-weight: 500; }
+.mega-menu a:hover { color: var(--color-blue); }
+.mega-menu a::after { display: none; }
+
+.navbar__actions { display: flex; align-items: center; gap: 10px; }
+
+/* Hamburger */
+.navbar__toggle {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px; background: none; border: none; cursor: pointer;
+}
+.navbar__toggle span { display: block; width: 22px; height: 2px; background: var(--color-white); transition: all 0.3s var(--ease-out); }
+.navbar__toggle.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.navbar__toggle.is-active span:nth-child(2) { opacity: 0; }
+.navbar__toggle.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed; top: 0; right: 0; height: 100vh; width: min(320px, 82vw);
+  background: var(--color-ink); z-index: 1500; padding: 100px 32px 32px;
+  transform: translateX(100%); transition: transform 0.4s var(--ease-out);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.mobile-menu.is-open { transform: translateX(0); }
+.mobile-menu ul { display: flex; flex-direction: column; gap: 22px; }
+.mobile-menu a { color: var(--color-white); font-size: 1.05rem; font-weight: 600; font-family: var(--font-display); }
+.mobile-menu a:hover { color: var(--color-gold-soft); }
+.mobile-menu__actions { display: flex; flex-direction: column; gap: 12px; margin-top: 40px; }
