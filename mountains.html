@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seven Mountains | Torchbearers Kingdom Movement</title>
+  <meta name="description" content="Discover the Seven Mountains of Influence and how TKM seeks to impact every sphere of society.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .page-hero {
+      padding: 8rem 1.5rem 4rem;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(7, 12, 25, 0.94));
+      color: #f8fafc;
+    }
+
+    .page-hero__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .page-hero__eyebrow {
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.12;
+      margin-bottom: 1rem;
+      font-family: 'Fraunces', Georgia, serif;
+    }
+
+    .page-hero p {
+      max-width: 780px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(248, 250, 252, 0.88);
+    }
+
+    .mountains-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 2rem;
+    }
+
+    .mountain-card {
+      background: rgba(255, 255, 255, 0.97);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 1.2rem;
+      padding: 1.6rem;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06);
+    }
+
+    .mountain-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.8rem;
+      color: #0f172a;
+      font-family: 'Fraunces', Georgia, serif;
+    }
+
+    .mountain-card p {
+      color: #475569;
+      line-height: 1.8;
+    }
+
+    .mountain-chip {
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      padding: 0.26rem 0.7rem;
+      border-radius: 999px;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mountain-quote {
+      margin-top: 1rem;
+      padding: 1rem 1.2rem;
+      border-left: 4px solid #fbbf24;
+      background: #f8fafc;
+      color: #334155;
+      font-style: italic;
+      border-radius: 0.6rem;
+    }
+
+    .mountain-cta {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 800px) {
+      .mountains-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__brand" aria-label="Torchbearers Kingdom Movement home">
+        <span class="navbar__flame" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2c1.5 3 4 4.8 4 8.2A4 4 0 1 1 8 10c0-1 .3-1.8.8-2.6C7.7 9 7 10.4 7 12a5 5 0 0 0 10 0c0-4.5-3-6.7-5-10z" fill="currentColor"/></svg>
+        </span>
+        <span class="navbar__wordmark">TKM<span class="navbar__wordmark-sub">Torchbearers Kingdom Movement</span></span>
+      </a>
+
+      <nav class="navbar__nav" id="primaryNav" aria-label="Primary">
+        <ul class="navbar__list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="vision.html">Vision</a></li>
+          <li><a href="mountains.html">Seven Mountains</a></li>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="prayer.html">Prayer</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <a href="#" class="btn btn--gold" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join the Movement</a>
+        <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="mountains.html">Seven Mountains</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="sermons.html">Sermons</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="prayer.html">Prayer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="mountains-page-title">
+      <div class="page-hero__inner reveal" data-reveal>
+        <p class="page-hero__eyebrow">The Seven Mountains</p>
+        <h1 id="mountains-page-title">Occupying every sphere of society with Kingdom light.</h1>
+        <p>
+          The Seven Mountains framework is a biblical model for influence. TKM believes every part of society can be transformed through discipleship, leadership, and purposeful engagement.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="mountains-overview">
+      <div class="container">
+        <div class="section-head reveal" data-reveal>
+          <p class="eyebrow eyebrow--dark">Kingdom Influence</p>
+          <h2 id="mountains-overview">Seven Mountains of Influence</h2>
+          <p class="lead">We are committed to shaping culture through education, family, government, business, media, health, and the church.</p>
+        </div>
+
+        <div class="mountains-grid">
+          <article class="mountain-card reveal" data-reveal>
+            <span class="mountain-chip">1. Education</span>
+            <h3>Education</h3>
+            <p>Raising minds that think with Kingdom wisdom and preparing leaders for every field of life.</p>
+            <div class="mountain-quote">“The future of a nation is shaped in the classroom.”</div>
+          </article>
+
+          <article class="mountain-card reveal" data-reveal>
+            <span class="mountain-chip">2. Religion</span>
+            <h3>Religious Identity</h3>
+            <p>Strengthening spiritual life, doctrine, worship, and authentic kingdom expression in the church and beyond.</p>
+            <div class="mountain-quote">“The church must shine with truth and holiness.”</div>
+          </article>
+
+          <article class="mountain-card reveal" data-reveal>
+            <span class="mountain-chip">3. Politics &amp; Law</span>
+            <h3>Politics &amp; Legal Systems</h3>
+            <p>Equipping people to influence governance with justice, righteousness, and godly leadership.</p>
+            <div class="mountain-quote">“Righteousness exalts a nation.”</div>
+          </article>
+
+          <article class="mountain-card reveal" data-reveal>
+            <span class="mountain-chip">4. Economy</span>
+            <h3>Economic Identity</h3>
+            <p>Building stewardship, enterprise, and financial wisdom that blesses communities and advances the Kingdom.</p>
+            <div class="mountain-quote">“Kingdom wealth should be a blessing to many.”</div>
+          </article>
+
+          <article class="mountain-card reveal" data-reveal>
+            <span class="mountain-chip">5. Family</span>
+            <h3>Family Identity</h3>
+            <p>Restoring the family as a place of love, order, purpose, and spiritual foundation.</p>
+            <div class="mountain-quote">“The family is the first institution of influence.”</div>
+          </article>
+
+          <article class="mountain-card reveal" data-reveal>
+            <span class="mountain-chip">6. Health</span>
+            <h3>Health Identity</h3>
+            <p>Promoting wholeness in body, soul, and spirit through compassion, care, and wisdom.</p>
+            <div class="mountain-quote">“Physical healing and spiritual vitality belong together.”</div>
+          </article>
+
+          <article class="mountain-card reveal" data-reveal>
+            <span class="mountain-chip">7. Entertainment &amp; Media</span>
+            <h3>Entertainment &amp; Sports</h3>
+            <p>Influencing culture through media, arts, sports, and creative expression that reflects Kingdom values.</p>
+            <div class="mountain-quote">“Culture is shaped by what people celebrate.”</div>
+          </article>
+        </div>
+
+        <div class="mountain-cta reveal" data-reveal>
+          <a href="#" class="btn btn--gold" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to learn more about the Seven Mountains.">Partner With TKM</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <span class="navbar__wordmark navbar__wordmark--footer">TKM</span>
+        <p>Torchbearers Kingdom Movement — bringing godly and spiritual enlightenment to this generation and beyond.</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Explore">
+        <p class="footer__heading">Explore</p>
+        <a href="about.html">About</a>
+        <a href="vision.html">Vision</a>
+        <a href="mountains.html">Seven Mountains</a>
+        <a href="education.html">Education</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Get Involved">
+        <p class="footer__heading">Get Involved</p>
+        <a href="#" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join the Movement</a>
+        <a href="prayer.html">Prayer Requests</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/navbar.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/whatsapp.js"></script>
+</body>
+</html>

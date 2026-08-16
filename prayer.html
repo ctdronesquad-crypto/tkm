@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayer | Torchbearers Kingdom Movement</title>
+  <meta name="description" content="Submit a prayer request to Torchbearers Kingdom Movement and connect with the prayer team.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .page-hero {
+      padding: 8rem 1.5rem 4rem;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.97), rgba(7, 12, 25, 0.93));
+      color: #f8fafc;
+    }
+
+    .page-hero__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .page-hero__eyebrow {
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 1.12;
+      margin-bottom: 1rem;
+      font-family: 'Fraunces', Georgia, serif;
+    }
+
+    .page-hero p {
+      max-width: 760px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(248, 250, 252, 0.88);
+    }
+
+    .prayer-shell {
+      padding: 4rem 1.5rem 5rem;
+      background: #f8fafc;
+    }
+
+    .prayer-card {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.08);
+    }
+
+    .prayer-card__body {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .prayer-card h2,
+    .prayer-panel h3 {
+      margin-bottom: 0.8rem;
+      color: #0f172a;
+      font-family: 'Fraunces', Georgia, serif;
+    }
+
+    .prayer-card p,
+    .prayer-card li,
+    .prayer-panel li {
+      color: #475569;
+      line-height: 1.8;
+    }
+
+    .prayer-card ul,
+    .prayer-panel ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .prayer-panel {
+      background: linear-gradient(180deg, rgba(29, 78, 216, 0.04), rgba(212, 175, 55, 0.07));
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+    }
+
+    .prayer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .prayer-note {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+    @media (max-width: 900px) {
+      .prayer-card__body {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__brand" aria-label="Torchbearers Kingdom Movement home">
+        <span class="navbar__flame" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2c1.5 3 4 4.8 4 8.2A4 4 0 1 1 8 10c0-1 .3-1.8.8-2.6C7.7 9 7 10.4 7 12a5 5 0 0 0 10 0c0-4.5-3-6.7-5-10z" fill="currentColor"/></svg>
+        </span>
+        <span class="navbar__wordmark">TKM<span class="navbar__wordmark-sub">Torchbearers Kingdom Movement</span></span>
+      </a>
+
+      <nav class="navbar__nav" id="primaryNav" aria-label="Primary">
+        <ul class="navbar__list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="vision.html">Vision</a></li>
+          <li><a href="mountains.html">Seven Mountains</a></li>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="prayer.html">Prayer</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <a href="#" class="btn btn--gold" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join the Movement</a>
+        <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="mountains.html">Seven Mountains</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="sermons.html">Sermons</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="prayer.html">Prayer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="prayer-page-title">
+      <div class="page-hero__inner reveal" data-reveal>
+        <p class="page-hero__eyebrow">Prayer</p>
+        <h1 id="prayer-page-title">We stand with you in prayer and intercession.</h1>
+        <p>
+          Whether you are facing a challenge, carrying a burden, or seeking direction, we welcome your prayer request and will stand with you in faith.
+        </p>
+      </div>
+    </section>
+
+    <section class="prayer-shell" aria-labelledby="prayer-request-heading">
+      <article class="prayer-card reveal" data-reveal>
+        <div class="prayer-card__body">
+          <div>
+            <h2 id="prayer-request-heading">Submit a prayer request</h2>
+            <p>
+              Prayer is powerful, and the Lord hears every cry. Share your need and we will lift it before God in faith and unity.
+            </p>
+            <ul>
+              <li>Health and healing</li>
+              <li>Family and relationships</li>
+              <li>Financial breakthrough</li>
+              <li>Spiritual direction and peace</li>
+              <li>Protection, restoration, and breakthrough</li>
+            </ul>
+
+            <div class="prayer-actions">
+              <a href="#" class="btn btn--gold" target="_blank" rel="noopener noreferrer" data-whatsapp-prayer data-whatsapp-text="Hello, I would like to submit a prayer request.">Send Prayer Request on WhatsApp</a>
+              <a href="index.html" class="btn btn--outline-dark">Back to Home</a>
+            </div>
+
+            <p class="prayer-note">You can send your prayer request directly through WhatsApp for a quick and personal response.</p>
+          </div>
+
+          <aside class="prayer-panel">
+            <h3>What to include</h3>
+            <ul>
+              <li>Your name (or a preferred name)</li>
+              <li>A short description of the request</li>
+              <li>Any urgent need or prayer focus</li>
+              <li>How we can pray with you</li>
+            </ul>
+          </aside>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <span class="navbar__wordmark navbar__wordmark--footer">TKM</span>
+        <p>Torchbearers Kingdom Movement — bringing godly and spiritual enlightenment to this generation and beyond.</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Explore">
+        <p class="footer__heading">Explore</p>
+        <a href="about.html">About</a>
+        <a href="vision.html">Vision</a>
+        <a href="mountains.html">Seven Mountains</a>
+        <a href="education.html">Education</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Get Involved">
+        <p class="footer__heading">Get Involved</p>
+        <a href="#" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join the Movement</a>
+        <a href="prayer.html">Prayer Requests</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/navbar.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/whatsapp.js"></script>
+</body>
+</html>
