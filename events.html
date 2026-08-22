@@ -296,18 +296,18 @@
       <nav class="navbar__nav" id="primaryNav" aria-label="Primary">
         <ul class="navbar__list">
           <li><a href="about.html">About</a></li>
-          <li><a href="vision.html">Vision</a></li>
+          <li><a href="partner.html">Partner With Us</a></li>
           <li><a href="mountains.html">Seven Mountains</a></li>
-          <li><a href="education.html">Education</a></li>
           <li><a href="sermons.html">Sermons</a></li>
           <li><a href="events.html">Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="prayer.html">Prayer</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
 
       <div class="navbar__actions">
-        <a href="#" class="btn btn--gold" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join the Movement</a>
+        <a href="#" class="btn btn--gold" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join Us</a>
         <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>
@@ -317,11 +317,11 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="about.html">About</a></li>
-        <li><a href="vision.html">Vision</a></li>
+        <li><a href="partner.html">Partner With Us</a></li>
         <li><a href="mountains.html">Seven Mountains</a></li>
-        <li><a href="education.html">Education</a></li>
         <li><a href="sermons.html">Sermons</a></li>
         <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="prayer.html">Prayer</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -403,6 +403,11 @@
                 </div>
 
                 <div class="field">
+                  <label for="dob">Date of birth</label>
+                  <input id="dob" name="dob" type="date">
+                </div>
+
+                <div class="field">
                   <label for="location">Location</label>
                   <input id="location" name="location" type="text" placeholder="City / Country">
                 </div>
@@ -410,6 +415,11 @@
                 <div class="field">
                   <label for="church">Church / Ministry</label>
                   <input id="church" name="church" type="text" placeholder="Your church or ministry">
+                </div>
+
+                <div class="field">
+                  <label for="role">Role at church</label>
+                  <input id="role" name="role" type="text" placeholder="e.g., Pastor, Worship Leader, Member">
                 </div>
 
                 <div class="field">
@@ -487,15 +497,17 @@
         event.preventDefault();
 
         const formData = new FormData(form);
-        const entries = [
+          const entries = [
           'The Identity Conference Registration',
           '-----------------------------------',
           '',
           `Full name: ${formData.get('fullName') || 'N/A'}`,
           `Email address: ${formData.get('email') || 'N/A'}`,
           `Phone number: ${formData.get('phone') || 'N/A'}`,
+          `Date of birth: ${formData.get('dob') || 'N/A'}`,
           `Location: ${formData.get('location') || 'N/A'}`,
           `Church / Ministry: ${formData.get('church') || 'N/A'}`,
+          `Role at church: ${formData.get('role') || 'N/A'}`,
           `Attendance type: ${formData.get('attendance') || 'N/A'}`,
           `Notes / Prayer request: ${formData.get('notes') || 'N/A'}`,
           '',

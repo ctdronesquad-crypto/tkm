@@ -135,18 +135,18 @@
       <nav class="navbar__nav" id="primaryNav" aria-label="Primary">
         <ul class="navbar__list">
           <li><a href="about.html">About</a></li>
-          <li><a href="vision.html">Vision</a></li>
+          <li><a href="partner.html">Partner With Us</a></li>
           <li><a href="mountains.html">Seven Mountains</a></li>
-          <li><a href="education.html">Education</a></li>
           <li><a href="sermons.html">Sermons</a></li>
           <li><a href="events.html">Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="prayer.html">Prayer</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
 
       <div class="navbar__actions">
-        <a href="#" class="btn btn--gold" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join the Movement</a>
+        <a href="#" class="btn btn--gold" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join Us</a>
         <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>
@@ -156,11 +156,11 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="about.html">About</a></li>
-        <li><a href="vision.html">Vision</a></li>
+        <li><a href="partner.html">Partner With Us</a></li>
         <li><a href="mountains.html">Seven Mountains</a></li>
-        <li><a href="education.html">Education</a></li>
         <li><a href="sermons.html">Sermons</a></li>
         <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="prayer.html">Prayer</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -194,12 +194,45 @@
               <li>Protection, restoration, and breakthrough</li>
             </ul>
 
-            <div class="prayer-actions">
-              <a href="#" class="btn btn--gold" target="_blank" rel="noopener noreferrer" data-whatsapp-prayer data-whatsapp-text="Hello, I would like to submit a prayer request.">Send Prayer Request on WhatsApp</a>
-              <a href="index.html" class="btn btn--outline-dark">Back to Home</a>
-            </div>
+            <form id="prayerForm" class="prayer-form">
+              <div class="prayer-form__grid">
+                <div class="field">
+                  <label for="prayerName">Name</label>
+                  <input id="prayerName" name="name" type="text" placeholder="Your name" required>
+                </div>
 
-            <p class="prayer-note">You can send your prayer request directly through WhatsApp for a quick and personal response.</p>
+                <div class="field">
+                  <label for="prayerNumber">Phone number</label>
+                  <input id="prayerNumber" name="number" type="tel" placeholder="+233 000 000 000">
+                </div>
+
+                <div class="field">
+                  <label for="prayerCountry">Country</label>
+                  <input id="prayerCountry" name="country" type="text" placeholder="Country">
+                </div>
+
+                <div class="field" style="grid-column: 1 / -1;">
+                  <label for="prayerRequest">Prayer request</label>
+                  <textarea id="prayerRequest" name="request" placeholder="Share your request" required></textarea>
+                </div>
+
+                <div class="field" style="grid-column: 1 / -1;">
+                  <label for="seedSowing">Would you like to sow a seed?</label>
+                  <select id="seedSowing" name="seedSowing">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="prayer-actions">
+                <button type="submit" class="btn btn--gold">Send Prayer</button>
+                <a href="#" class="btn btn--outline-dark" id="whatsappPrayerLink" data-whatsapp-prayer data-whatsapp-text="Hello, I would like to submit a prayer request.">Send Prayer Request on WhatsApp</a>
+                <a href="index.html" class="btn btn--outline-dark">Back to Home</a>
+              </div>
+            </form>
+
+            <p class="prayer-note">You can also send your prayer request directly through WhatsApp for a quick and personal response.</p>
           </div>
 
           <aside class="prayer-panel">
@@ -243,5 +276,42 @@
   <script src="js/navbar.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/whatsapp.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prayerForm = document.getElementById('prayerForm');
+      if (!prayerForm) return;
+
+      prayerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(prayerForm);
+        const entries = [
+          'Prayer Request',
+          '----------------',
+          `Name: ${formData.get('name') || 'N/A'}`,
+          `Phone number: ${formData.get('number') || 'N/A'}`,
+          `Country: ${formData.get('country') || 'N/A'}`,
+          `Prayer request: ${formData.get('request') || 'N/A'}`,
+          `Seed sowing: ${formData.get('seedSowing') || 'N/A'}`,
+          '',
+          'Submitted via Torchbearers Kingdom Movement website.'
+        ];
+
+        const textContent = entries.join('\n');
+        const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+
+        link.href = url;
+        link.download = 'prayer-request.txt';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        prayerForm.reset();
+      });
+    });
+  </script>
 </body>
 </html>

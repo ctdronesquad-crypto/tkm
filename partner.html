@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner With Us | Torchbearers Kingdom Movement</title>
+  <meta name="description" content="Partner with Torchbearers Kingdom Movement to bring Kingdom impact to nations.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .partner-hero { padding: 6rem 1.5rem 3rem; background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(7,12,25,0.94)); color: #f8fafc; }
+    .partner-hero__inner { max-width: 1100px; margin: 0 auto; }
+    .partner-card { max-width: 1100px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 30px 80px rgba(15,23,42,0.06); }
+    .partner-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 24px; align-items: start; }
+    @media (max-width: 900px) { .partner-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__brand" aria-label="Torchbearers Kingdom Movement home">
+        <span class="navbar__flame" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2c1.5 3 4 4.8 4 8.2A4 4 0 1 1 8 10c0-1 .3-1.8.8-2.6C7.7 9 7 10.4 7 12a5 5 0 0 0 10 0c0-4.5-3-6.7-5-10z" fill="currentColor"/></svg>
+        </span>
+        <span class="navbar__wordmark">TKM<span class="navbar__wordmark-sub">Torchbearers Kingdom Movement</span></span>
+      </a>
+
+      <nav class="navbar__nav" id="primaryNav" aria-label="Primary">
+        <ul class="navbar__list">
+          <li><a href="about.html">About</a></li>
+          <li><a href="partner.html">Partner With Us</a></li>
+          <li><a href="mountains.html">Seven Mountains</a></li>
+          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="prayer.html">Prayer</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <a href="donate.html" class="btn btn--ghost-light">Give</a>
+        <a href="https://wa.me/?text=Hello%2C%20I%20would%20like%20to%20partner%20with%20TKM." class="btn btn--gold" target="_blank" rel="noopener noreferrer">Partner Now</a>
+        <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="partner.html">Partner With Us</a></li>
+        <li><a href="mountains.html">Seven Mountains</a></li>
+        <li><a href="sermons.html">Sermons</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="prayer.html">Prayer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="partner-hero" aria-labelledby="partner-title">
+      <div class="partner-hero__inner">
+        <p class="eyebrow reveal" data-reveal>Partner With Us</p>
+        <h1 id="partner-title">Join hands with us to bring Kingdom impact</h1>
+        <p class="lead">Thank you for considering partnership. Your support — through prayer, resources, or collaboration — helps us carry the light of the Kingdom into nations and communities.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="partner-form-heading">
+      <div class="partner-card">
+        <div class="partner-grid">
+          <div>
+            <h2 id="partner-form-heading">Become a partner</h2>
+            <p>Complete the form and our team will follow up with next steps. We welcome every form of partnership — financial, ministry collaboration, and prayer support.</p>
+
+            <form id="partnerForm" class="prayer-form" novalidate>
+              <div class="prayer-form__grid">
+                <div class="field">
+                  <label for="partnerName">Full name</label>
+                  <input id="partnerName" name="name" type="text" placeholder="Your full name" required>
+                </div>
+
+                <div class="field">
+                  <label for="partnerEmail">Email address</label>
+                  <input id="partnerEmail" name="email" type="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="field">
+                  <label for="partnerPhone">Phone number</label>
+                  <input id="partnerPhone" name="phone" type="tel" placeholder="+233 000 000 000">
+                </div>
+
+                <div class="field">
+                  <label for="partnerCountry">Country</label>
+                  <input id="partnerCountry" name="country" type="text" placeholder="Country">
+                </div>
+
+                <div class="field">
+                  <label for="partnerOrg">Organization (optional)</label>
+                  <input id="partnerOrg" name="organization" type="text" placeholder="Organization or church">
+                </div>
+
+                <div class="field">
+                  <label for="partnershipType">Partnership type</label>
+                  <select id="partnershipType" name="partnershipType">
+                    <option value="Prayer">Prayer</option>
+                    <option value="Volunteer">Volunteer</option>
+                    <option value="Financial - One-time">Financial — One-time</option>
+                    <option value="Financial - Monthly">Financial — Monthly</option>
+                    <option value="Collaboration">Collaboration</option>
+                  </select>
+                </div>
+
+                <div class="field" style="grid-column: 1 / -1;">
+                  <label for="partnerMessage">Message</label>
+                  <textarea id="partnerMessage" name="message" placeholder="Tell us how you'd like to partner" required></textarea>
+                </div>
+              </div>
+
+              <div class="prayer-actions">
+                <button type="submit" class="btn btn--gold">Submit Partnership</button>
+                <a href="https://wa.me/?text=Hello%2C%20I%20would%20like%20to%20partner%20with%20TKM." class="btn btn--outline-dark" target="_blank" rel="noopener noreferrer">Contact on WhatsApp</a>
+              </div>
+            </form>
+
+            <p class="prayer-note">Our team will review your submission and reach out. Thank you for standing with us.</p>
+          </div>
+
+          <aside class="prayer-panel">
+            <h3>Why partner?</h3>
+            <ul>
+              <li>Extend Kingdom teaching and discipleship</li>
+              <li>Resource outreach and community initiatives</li>
+              <li>Pray with leaders and provide spiritual covering</li>
+              <li>Collaborate on events and training</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <span class="navbar__wordmark navbar__wordmark--footer">TKM</span>
+        <p>Torchbearers Kingdom Movement — bringing godly and spiritual enlightenment to this generation and beyond.</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Explore">
+        <p class="footer__heading">Explore</p>
+        <a href="about.html">About</a>
+        <a href="vision.html">Vision</a>
+        <a href="mountains.html">Seven Mountains</a>
+        <a href="education.html">Education</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Get Involved">
+        <p class="footer__heading">Get Involved</p>
+        <a href="#" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join the Movement</a>
+        <a href="prayer.html">Prayer Requests</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/navbar.js"></script>
+  <script src="js/animations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('partnerForm');
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const lines = [
+          'TKM Partnership Submission',
+          '---------------------------',
+          `Name: ${fd.get('name') || 'N/A'}`,
+          `Email: ${fd.get('email') || 'N/A'}`,
+          `Phone: ${fd.get('phone') || 'N/A'}`,
+          `Country: ${fd.get('country') || 'N/A'}`,
+          `Organization: ${fd.get('organization') || 'N/A'}`,
+          `Partnership type: ${fd.get('partnershipType') || 'N/A'}`,
+          `Message: ${fd.get('message') || 'N/A'}`,
+          '',
+          'Submitted via Torchbearers Kingdom Movement website.'
+        ];
+
+        const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'tkm-partnership.txt';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+
+        form.reset();
+        alert('Thank you — your partnership submission has been downloaded. Our team will follow up.');
+      });
+    });
+  </script>
+</body>
+</html>

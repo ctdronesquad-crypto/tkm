@@ -81,3 +81,56 @@
 .mobile-menu a { color: var(--color-white); font-size: 1.05rem; font-weight: 600; font-family: var(--font-display); }
 .mobile-menu a:hover { color: var(--color-gold-soft); }
 .mobile-menu__actions { display: flex; flex-direction: column; gap: 12px; margin-top: 40px; }
+
+/* Style the Give button with gold color and padding */
+.navbar__actions .btn--ghost-light {
+  background: linear-gradient(135deg, var(--color-gold-soft), var(--color-gold));
+  color: var(--color-ink);
+  box-shadow: var(--shadow-gold-glow);
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.navbar__actions .btn--ghost-light:hover {
+  box-shadow: 0 0 55px rgba(212,175,55,0.4);
+}
+
+/* Make the 'Join Us' button in the navbar more compact and responsive */
+.navbar__actions .btn--gold {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .navbar__actions .btn--ghost-light {
+    padding: 9px 16px;
+    font-size: 0.85rem;
+  }
+
+  .navbar__actions .btn--gold {
+    padding: 9px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar__actions .btn--ghost-light {
+    padding: 10px 18px;
+    font-size: 0.88rem;
+  }
+
+  .navbar__actions .btn--gold {
+    padding: 10px 18px;
+    font-size: 0.88rem;
+  }
+}
+
+/* On mobile, make action buttons full width for easier tapping */
+.mobile-menu__actions .btn,
+.mobile-menu .btn {
+  width: 100%;
+  padding: 12px 16px;
+  text-align: center;
+}

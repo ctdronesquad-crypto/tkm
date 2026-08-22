@@ -342,3 +342,72 @@ p { margin: 0 0 1em; }
 }
 .back-to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
 .back-to-top:hover { background: var(--color-gold); color: var(--color-ink); }
+
+/* Prayer form styles */
+.prayer-form {
+  padding: 20px 0 8px;
+}
+.prayer-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.prayer-form .field {
+  display: block;
+}
+.prayer-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: var(--color-navy);
+  font-size: 0.95rem;
+}
+.prayer-form input[type="text"],
+.prayer-form input[type="tel"],
+.prayer-form input[type="email"],
+.prayer-form textarea,
+.prayer-form select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-slate-100);
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+.prayer-form textarea { min-height: 120px; resize: vertical; }
+.prayer-form .prayer-actions { margin-top: 18px; }
+
+@media (max-width: 900px) {
+  .prayer-form__grid { grid-template-columns: 1fr; }
+}
+
+/* Event form styles (scoped) */
+.event-form { padding: 18px 0 6px; }
+.event-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.event-form .field { display: block; }
+.event-form label {
+  display: block; margin-bottom: 8px; font-weight: 700; color: var(--color-navy); font-size: 0.95rem;
+}
+.event-form input[type="text"],
+.event-form input[type="tel"],
+.event-form input[type="email"],
+.event-form input[type="date"],
+.event-form textarea,
+.event-form select {
+  width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--color-slate-100);
+  background: var(--color-white); color: var(--color-navy); font-family: var(--font-body); font-size: 0.98rem;
+}
+.event-form textarea { min-height: 120px; resize: vertical; }
+
+@media (max-width: 900px) {
+  .event-form__grid { grid-template-columns: 1fr; }
+}

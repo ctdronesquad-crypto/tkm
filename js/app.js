@@ -77,19 +77,74 @@
     });
   }
 
-  /* ---- Scripture of the day rotation ---- */
-  const scriptures = [
-    { text: '"Arise, shine; for thy light is come, and the glory of the LORD is risen upon thee."', ref: 'Isaiah 60:1' },
-    { text: '"Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven."', ref: 'Matthew 5:16' },
-    { text: '"Thy kingdom come. Thy will be done in earth, as it is in heaven."', ref: 'Matthew 6:10' },
-    { text: '"The kingdoms of this world are become the kingdoms of our Lord, and of his Christ."', ref: 'Revelation 11:15' }
-  ];
-  const scriptureEl = document.getElementById('scriptureText');
-  if (scriptureEl) {
-    const dayIndex = new Date().getDate() % scriptures.length;
-    const pick = scriptures[dayIndex];
-    scriptureEl.textContent = `${pick.text} — ${pick.ref}`;
-  }
+  /* ---- Scripture of the day (API + daily cache + fallback) ---- */
+  (function handleScriptureOfTheDay() {
+    const el = document.getElementById('scriptureText');
+    if (!el) return;
+
+    const STORAGE_KEY = 'tkm.scriptureOfDay.v1';
+    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+
+    // Local fallback list (used when fetch fails)
+    const fallback = [
+      { text: 'Arise, shine; for thy light is come, and the glory of the LORD is risen upon thee.', ref: 'Isaiah 60:1' },
+      { text: 'Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.', ref: 'Matthew 5:16' },
+      { text: 'Thy kingdom come. Thy will be done in earth, as it is in heaven.', ref: 'Matthew 6:10' },
+      { text: 'The kingdoms of this world are become the kingdoms of our Lord, and of his Christ.', ref: 'Revelation 11:15' }
+    ];
+
+    // Read cached item and use if it's for today
+    try {
+      const cachedRaw = localStorage.getItem(STORAGE_KEY);
+      if (cachedRaw) {
+        const cached = JSON.parse(cachedRaw);
+        if (cached && cached.date === today && cached.display) {
+          el.textContent = cached.display;
+          return;
+        }
+      }
+    } catch (err) {
+      // Ignore parse/storage errors and continue to fetch/fallback
+    }
+
+    // Fetch with timeout
+    const API_URL = 'https://bible-api.com/data/web/random';
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 4500);
+
+    fetch(API_URL, { signal: controller.signal })
+      .then((res) => {
+        clearTimeout(timeout);
+        if (!res.ok) throw new Error('Network response not OK');
+        return res.json();
+      })
+      .then((data) => {
+        // Defensive parsing: prefer canonical fields if present
+        const passageText = (data && (data.text || (data.verses && data.verses.map(v => v.text).join(' ')))) || '';
+        const reference = (data && (data.reference || data.book_name || (data.verses && data.verses.map(v => v.reference).join('; ')))) || '';
+        const passage = String(passageText).trim();
+        const ref = String(reference).trim();
+
+        if (!passage) throw new Error('Invalid payload');
+
+        const display = `${passage} — ${ref || 'Scripture'}`;
+        el.textContent = display;
+
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ date: today, display }));
+        } catch (err) {
+          // ignore storage write errors
+        }
+      })
+      .catch(() => {
+        // On any error, pick a fallback item deterministically by date
+        const daySeed = Number(today.replace(/-/g, '')) || 0; // simple seed
+        const pick = fallback[daySeed % fallback.length];
+        const display = `${pick.text} — ${pick.ref}`;
+        el.textContent = display;
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ date: today, display })); } catch (err) {}
+      });
+  })();
 
   /* ---- Footer year ---- */
   const yearEl = document.getElementById('year');
