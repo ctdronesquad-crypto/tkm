@@ -39,9 +39,8 @@
       <nav class="navbar__nav" id="primaryNav" aria-label="Primary">
         <ul class="navbar__list">
           <li><a href="about.html">About</a></li>
-          <li><a href="partner.html">Partner With Us</a></li>
           <li><a href="mountains.html">Seven Mountains</a></li>
-          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="sermons.html">Resources</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="prayer.html">Prayer</a></li>
@@ -61,9 +60,8 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="about.html">About</a></li>
-        <li><a href="partner.html">Partner With Us</a></li>
         <li><a href="mountains.html">Seven Mountains</a></li>
-        <li><a href="sermons.html">Sermons</a></li>
+        <li><a href="sermons.html">Resources</a></li>
         <li><a href="events.html">Events</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="prayer.html">Prayer</a></li>
@@ -132,6 +130,8 @@
                 </div>
               </div>
 
+              <p id="partnerFormMessage" class="form-message" aria-live="polite"></p>
+
               <div class="prayer-actions">
                 <button type="submit" class="btn btn--gold">Submit Partnership</button>
                 <a href="https://wa.me/?text=Hello%2C%20I%20would%20like%20to%20partner%20with%20TKM." class="btn btn--outline-dark" target="_blank" rel="noopener noreferrer">Contact on WhatsApp</a>
@@ -184,37 +184,58 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('partnerForm');
+      const formMessage = document.getElementById('partnerFormMessage');
       if (!form) return;
 
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const fd = new FormData(form);
-        const lines = [
-          'TKM Partnership Submission',
-          '---------------------------',
-          `Name: ${fd.get('name') || 'N/A'}`,
-          `Email: ${fd.get('email') || 'N/A'}`,
-          `Phone: ${fd.get('phone') || 'N/A'}`,
-          `Country: ${fd.get('country') || 'N/A'}`,
-          `Organization: ${fd.get('organization') || 'N/A'}`,
-          `Partnership type: ${fd.get('partnershipType') || 'N/A'}`,
-          `Message: ${fd.get('message') || 'N/A'}`,
-          '',
-          'Submitted via Torchbearers Kingdom Movement website.'
-        ];
 
-        const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'tkm-partnership.txt';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+        const name = String(payload.name || '').trim();
+        const email = String(payload.email || '').trim();
+        const message = String(payload.message || '').trim();
 
-        form.reset();
-        alert('Thank you — your partnership submission has been downloaded. Our team will follow up.');
+        if (!name || !email || !message) {
+          formMessage.textContent = 'Please complete your name, email, and message before submitting.';
+          formMessage.style.color = '#dc2626';
+          return;
+        }
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        formMessage.textContent = '';
+
+        try {
+          const response = await fetch('/.netlify/functions/send-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              formType: 'partner',
+              ...payload
+            })
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result?.error || 'There was a problem submitting your form.');
+          }
+
+          form.reset();
+          formMessage.textContent = 'Thank you for partnering with us. A confirmation email has been sent to your inbox.';
+          formMessage.style.color = '#166534';
+        } catch (error) {
+          formMessage.textContent = error.message || 'Something went wrong. Please try again shortly.';
+          formMessage.style.color = '#dc2626';
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        }
       });
     });
   </script>

@@ -296,9 +296,8 @@
       <nav class="navbar__nav" id="primaryNav" aria-label="Primary">
         <ul class="navbar__list">
           <li><a href="about.html">About</a></li>
-          <li><a href="partner.html">Partner With Us</a></li>
           <li><a href="mountains.html">Seven Mountains</a></li>
-          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="sermons.html">Resources</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="prayer.html">Prayer</a></li>
@@ -317,9 +316,8 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="about.html">About</a></li>
-        <li><a href="partner.html">Partner With Us</a></li>
         <li><a href="mountains.html">Seven Mountains</a></li>
-        <li><a href="sermons.html">Sermons</a></li>
+        <li><a href="sermons.html">Resources</a></li>
         <li><a href="events.html">Events</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="prayer.html">Prayer</a></li>
@@ -437,13 +435,15 @@
                 <textarea id="notes" name="notes" placeholder="Tell us any notes, expectations, or prayer needs."></textarea>
               </div>
 
+              <p id="eventFormMessage" class="form-message" aria-live="polite"></p>
+
               <div class="event-form__submit">
                 <button type="submit" class="btn btn--gold">Send</button>
                 <a href="#" class="btn btn--outline-dark" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to learn more about The Identity Conference.">Ask a Question</a>
               </div>
             </form>
 
-            <p class="event-note">Your details will be downloaded as a text file when you click Send.</p>
+            <p class="event-note">We will contact you with the next steps after your registration is received.</p>
           </div>
 
           <aside class="event-highlights">
@@ -490,43 +490,58 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('eventRegistrationForm');
+      const formMessage = document.getElementById('eventFormMessage');
 
       if (!form) return;
 
-      form.addEventListener('submit', (event) => {
+      form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const formData = new FormData(form);
-          const entries = [
-          'The Identity Conference Registration',
-          '-----------------------------------',
-          '',
-          `Full name: ${formData.get('fullName') || 'N/A'}`,
-          `Email address: ${formData.get('email') || 'N/A'}`,
-          `Phone number: ${formData.get('phone') || 'N/A'}`,
-          `Date of birth: ${formData.get('dob') || 'N/A'}`,
-          `Location: ${formData.get('location') || 'N/A'}`,
-          `Church / Ministry: ${formData.get('church') || 'N/A'}`,
-          `Role at church: ${formData.get('role') || 'N/A'}`,
-          `Attendance type: ${formData.get('attendance') || 'N/A'}`,
-          `Notes / Prayer request: ${formData.get('notes') || 'N/A'}`,
-          '',
-          'Submitted via Torchbearers Kingdom Movement website.'
-        ];
+        const formData = Object.fromEntries(new FormData(form).entries());
+        const fullName = String(formData.fullName || '').trim();
+        const email = String(formData.email || '').trim();
 
-        const textContent = entries.join('\n');
-        const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
+        if (!fullName || !email) {
+          formMessage.textContent = 'Please enter your full name and email address.';
+          formMessage.style.color = '#dc2626';
+          return;
+        }
 
-        link.href = url;
-        link.download = 'identity-conference-registration.txt';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        formMessage.textContent = '';
 
-        form.reset();
+        try {
+          const response = await fetch('/.netlify/functions/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              formType: 'event',
+              ...formData,
+              name: fullName,
+              email: email,
+              message: formData.notes || 'Event registration'
+            })
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result?.error || 'There was a problem submitting your registration.');
+          }
+
+          form.reset();
+          formMessage.textContent = 'Thank you. Your registration has been received and a confirmation email has been sent to you.';
+          formMessage.style.color = '#166534';
+        } catch (error) {
+          formMessage.textContent = error.message || 'Something went wrong. Please try again shortly.';
+          formMessage.style.color = '#dc2626';
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        }
       });
     });
   </script>
