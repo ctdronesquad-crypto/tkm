@@ -54,11 +54,11 @@
     });
   });
 
-  /* ---- Newsletter form validation ---- */
+  /* ---- Newsletter form: client-side check + real submission via Netlify Function ---- */
   const newsletterForm = document.getElementById('newsletterForm');
   const newsletterMessage = document.getElementById('newsletterMessage');
   if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
+    newsletterForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const emailInput = document.getElementById('newsletterEmail');
       const email = emailInput.value.trim();
@@ -71,80 +71,101 @@
         return;
       }
 
-      newsletterMessage.textContent = "You're subscribed. Welcome to the movement.";
-      newsletterMessage.style.color = '';
-      newsletterForm.reset();
+      const submitBtn = newsletterForm.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      newsletterMessage.textContent = '';
+
+      try {
+        const response = await fetch('/.netlify/functions/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formType: 'newsletter',
+            name: 'Newsletter Subscriber',
+            email
+          })
+        });
+
+        if (!response.ok) throw new Error('Request failed');
+
+        newsletterMessage.textContent = "You're subscribed. Welcome to the movement.";
+        newsletterMessage.style.color = '';
+        newsletterForm.reset();
+      } catch (err) {
+        newsletterMessage.textContent = 'Something went wrong. Please try again shortly.';
+        newsletterMessage.style.color = '#f87171';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
     });
   }
 
-  /* ---- Scripture of the day (API + daily cache + fallback) ---- */
-  (function handleScriptureOfTheDay() {
-    const el = document.getElementById('scriptureText');
-    if (!el) return;
+  /* ---- Scripture of the day ----
+     Fetches a random verse from bible-api.com (free, no key required)
+     and caches it in localStorage for the current date, so every
+     visitor sees the same verse all day and it changes once every
+     24 hours. Falls back to a hardcoded list if the API is unreachable. */
+  const FALLBACK_SCRIPTURES = [
+    { text: 'Arise, shine; for thy light is come, and the glory of the LORD is risen upon thee.', ref: 'Isaiah 60:1' },
+    { text: 'Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.', ref: 'Matthew 5:16' },
+    { text: 'Thy kingdom come. Thy will be done in earth, as it is in heaven.', ref: 'Matthew 6:10' },
+    { text: 'The kingdoms of this world are become the kingdoms of our Lord, and of his Christ.', ref: 'Revelation 11:15' }
+  ];
 
-    const STORAGE_KEY = 'tkm.scriptureOfDay.v1';
-    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  const scriptureEl = document.getElementById('scriptureText');
 
-    // Local fallback list (used when fetch fails)
-    const fallback = [
-      { text: 'Arise, shine; for thy light is come, and the glory of the LORD is risen upon thee.', ref: 'Isaiah 60:1' },
-      { text: 'Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.', ref: 'Matthew 5:16' },
-      { text: 'Thy kingdom come. Thy will be done in earth, as it is in heaven.', ref: 'Matthew 6:10' },
-      { text: 'The kingdoms of this world are become the kingdoms of our Lord, and of his Christ.', ref: 'Revelation 11:15' }
-    ];
+  function renderScripture(text, ref) {
+    if (scriptureEl) scriptureEl.textContent = `"${text.trim()}" — ${ref}`;
+  }
 
-    // Read cached item and use if it's for today
+  function todayKey() {
+    const d = new Date();
+    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  }
+
+  function showFallbackScripture() {
+    const dayIndex = new Date().getDate() % FALLBACK_SCRIPTURES.length;
+    const pick = FALLBACK_SCRIPTURES[dayIndex];
+    renderScripture(pick.text, pick.ref);
+  }
+
+  if (scriptureEl) {
+    const cacheKey = 'tkm_scripture_of_the_day';
+    let cached = null;
     try {
-      const cachedRaw = localStorage.getItem(STORAGE_KEY);
-      if (cachedRaw) {
-        const cached = JSON.parse(cachedRaw);
-        if (cached && cached.date === today && cached.display) {
-          el.textContent = cached.display;
-          return;
-        }
-      }
+      cached = JSON.parse(localStorage.getItem(cacheKey));
     } catch (err) {
-      // Ignore parse/storage errors and continue to fetch/fallback
+      cached = null;
     }
 
-    // Fetch with timeout
-    const API_URL = 'https://bible-api.com/data/web/random';
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 4500);
-
-    fetch(API_URL, { signal: controller.signal })
-      .then((res) => {
-        clearTimeout(timeout);
-        if (!res.ok) throw new Error('Network response not OK');
-        return res.json();
-      })
-      .then((data) => {
-        // Defensive parsing: prefer canonical fields if present
-        const passageText = (data && (data.text || (data.verses && data.verses.map(v => v.text).join(' ')))) || '';
-        const reference = (data && (data.reference || data.book_name || (data.verses && data.verses.map(v => v.reference).join('; ')))) || '';
-        const passage = String(passageText).trim();
-        const ref = String(reference).trim();
-
-        if (!passage) throw new Error('Invalid payload');
-
-        const display = `${passage} — ${ref || 'Scripture'}`;
-        el.textContent = display;
-
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify({ date: today, display }));
-        } catch (err) {
-          // ignore storage write errors
-        }
-      })
-      .catch(() => {
-        // On any error, pick a fallback item deterministically by date
-        const daySeed = Number(today.replace(/-/g, '')) || 0; // simple seed
-        const pick = fallback[daySeed % fallback.length];
-        const display = `${pick.text} — ${pick.ref}`;
-        el.textContent = display;
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ date: today, display })); } catch (err) {}
-      });
-  })();
+    if (cached && cached.date === todayKey() && cached.text && cached.ref) {
+      // Already fetched today's verse — reuse it, no network call needed.
+      renderScripture(cached.text, cached.ref);
+    } else {
+      // Need a new verse for today.
+      fetch('https://bible-api.com/data/web/random')
+        .then((res) => {
+          if (!res.ok) throw new Error('Bible API request failed');
+          return res.json();
+        })
+        .then((data) => {
+          const verse = data && data.random_verse;
+          if (!verse || !verse.text) throw new Error('Unexpected response shape');
+          const ref = `${verse.book} ${verse.chapter}:${verse.verse}`;
+          renderScripture(verse.text, ref);
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify({ date: todayKey(), text: verse.text, ref }));
+          } catch (err) { /* localStorage unavailable — non-fatal, just skip caching */ }
+        })
+        .catch(() => {
+          // API down or blocked — use the hardcoded fallback so the strip never breaks.
+          showFallbackScripture();
+        });
+    }
+  }
 
   /* ---- Footer year ---- */
   const yearEl = document.getElementById('year');
