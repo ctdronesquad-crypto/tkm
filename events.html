@@ -487,63 +487,7 @@
   <script src="js/navbar.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/whatsapp.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('eventRegistrationForm');
-      const formMessage = document.getElementById('eventFormMessage');
-
-      if (!form) return;
-
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const formData = Object.fromEntries(new FormData(form).entries());
-        const fullName = String(formData.fullName || '').trim();
-        const email = String(formData.email || '').trim();
-
-        if (!fullName || !email) {
-          formMessage.textContent = 'Please enter your full name and email address.';
-          formMessage.style.color = '#dc2626';
-          return;
-        }
-
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
-        formMessage.textContent = '';
-
-        try {
-          const response = await fetch('/.netlify/functions/send-email', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              formType: 'event',
-              ...formData,
-              name: fullName,
-              email: email,
-              message: formData.notes || 'Event registration'
-            })
-          });
-
-          const result = await response.json();
-
-          if (!response.ok) {
-            throw new Error(result?.error || 'There was a problem submitting your registration.');
-          }
-
-          form.reset();
-          formMessage.textContent = 'Thank you. Your registration has been received and a confirmation email has been sent to you.';
-          formMessage.style.color = '#166534';
-        } catch (error) {
-          formMessage.textContent = error.message || 'Something went wrong. Please try again shortly.';
-          formMessage.style.color = '#dc2626';
-        } finally {
-          submitButton.disabled = false;
-          submitButton.textContent = originalText;
-        }
-      });
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

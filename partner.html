@@ -181,63 +181,7 @@
 
   <script src="js/navbar.js"></script>
   <script src="js/animations.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('partnerForm');
-      const formMessage = document.getElementById('partnerFormMessage');
-      if (!form) return;
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-        const payload = Object.fromEntries(formData.entries());
-        const name = String(payload.name || '').trim();
-        const email = String(payload.email || '').trim();
-        const message = String(payload.message || '').trim();
-
-        if (!name || !email || !message) {
-          formMessage.textContent = 'Please complete your name, email, and message before submitting.';
-          formMessage.style.color = '#dc2626';
-          return;
-        }
-
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
-        formMessage.textContent = '';
-
-        try {
-          const response = await fetch('/.netlify/functions/send-email', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              formType: 'partner',
-              ...payload
-            })
-          });
-
-          const result = await response.json();
-
-          if (!response.ok) {
-            throw new Error(result?.error || 'There was a problem submitting your form.');
-          }
-
-          form.reset();
-          formMessage.textContent = 'Thank you for partnering with us. A confirmation email has been sent to your inbox.';
-          formMessage.style.color = '#166534';
-        } catch (error) {
-          formMessage.textContent = error.message || 'Something went wrong. Please try again shortly.';
-          formMessage.style.color = '#dc2626';
-        } finally {
-          submitButton.disabled = false;
-          submitButton.textContent = originalText;
-        }
-      });
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

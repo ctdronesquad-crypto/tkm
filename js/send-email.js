@@ -19,11 +19,11 @@ const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 // Where each form type's notification should be delivered.
 // Update these to your real ministry inboxes.
 const RECIPIENTS = {
-  contact: 'info@tkm.org',
-  join: 'join@tkm.org',
-  prayer: 'prayer@tkm.org',
-  newsletter: 'newsletter@tkm.org',
-  default: 'info@tkm.org'
+  contact: 'torchbearerskingdommovement@gmail.com',
+  join: 'torchbearerskingdommovement@gmail.com',
+  prayer: 'torchbearerskingdommovement@gmail.com',
+  newsletter: 'torchbearerskingdommovement@gmail.com',
+  default: 'torchbearerskingdommovement@gmail.com'
 };
 
 // Change this once your domain is verified in Resend.

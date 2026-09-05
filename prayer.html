@@ -274,42 +274,7 @@
   <script src="js/navbar.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/whatsapp.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const prayerForm = document.getElementById('prayerForm');
-      if (!prayerForm) return;
-
-      prayerForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(prayerForm);
-        const entries = [
-          'Prayer Request',
-          '----------------',
-          `Name: ${formData.get('name') || 'N/A'}`,
-          `Phone number: ${formData.get('number') || 'N/A'}`,
-          `Country: ${formData.get('country') || 'N/A'}`,
-          `Prayer request: ${formData.get('request') || 'N/A'}`,
-          `Seed sowing: ${formData.get('seedSowing') || 'N/A'}`,
-          '',
-          'Submitted via Torchbearers Kingdom Movement website.'
-        ];
-
-        const textContent = entries.join('\n');
-        const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-
-        link.href = url;
-        link.download = 'prayer-request.txt';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-
-        prayerForm.reset();
-      });
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

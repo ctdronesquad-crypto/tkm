@@ -7,6 +7,14 @@
   const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
 
+  function closeMobileMenu() {
+    if (!mobileMenu || !navToggle) return;
+    mobileMenu.classList.remove('is-open');
+    navToggle.classList.remove('is-active');
+    navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
   function updateNavbarState() {
     if (!navbar) return;
     if (window.scrollY > 40) {
@@ -20,6 +28,15 @@
   window.addEventListener('scroll', updateNavbarState, { passive: true });
 
   if (navToggle && mobileMenu) {
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'mobile-menu__close';
+    closeButton.setAttribute('aria-label', 'Close menu');
+    closeButton.innerHTML = '<span aria-hidden="true">›</span>';
+    closeButton.addEventListener('click', closeMobileMenu);
+
+    mobileMenu.prepend(closeButton);
+
     navToggle.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('is-open');
       navToggle.classList.toggle('is-active', isOpen);
@@ -27,23 +44,13 @@
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
-    // Close mobile menu when a link is clicked
     mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('is-open');
-        navToggle.classList.remove('is-active');
-        navToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMobileMenu);
     });
 
-    // Close on Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
-        mobileMenu.classList.remove('is-open');
-        navToggle.classList.remove('is-active');
-        navToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+        closeMobileMenu();
       }
     });
   }

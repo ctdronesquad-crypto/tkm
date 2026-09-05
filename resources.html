@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Give | Torchbearers Kingdom Movement</title>
-  <meta name="description" content="Support the work of Torchbearers Kingdom Movement through giving.">
-
+  <title>Resources | Torchbearers Kingdom Movement</title>
+  <meta name="description" content="Resources page coming soon for Torchbearers Kingdom Movement.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/footer.css">
@@ -17,89 +15,30 @@
   <link rel="stylesheet" href="css/responsive.css">
   <style>
     body {
-      background: #f8fafc;
-      color: #0f172a;
+      background: linear-gradient(180deg, #edf3fb 0%, #f4f7fb 100%);
     }
-
-    .giving-page {
-      padding: 7rem 1.5rem 4rem;
+    .placeholder-card {
+      background: linear-gradient(160deg, rgba(8, 14, 25, 0.96), rgba(21, 32, 55, 0.96));
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+      color: #ffffff;
     }
-
-    .giving-shell {
-      max-width: 760px;
-      margin: 0 auto;
-      background: #ffffff;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 22px;
-      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
-      padding: 2rem;
+    .placeholder-card .eyebrow,
+    .placeholder-card h1,
+    .placeholder-card .lead,
+    .placeholder-card .btn {
+      color: inherit;
     }
-
-    .giving-shell h1 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(2rem, 3vw, 3rem);
-      margin-bottom: 0.75rem;
-      color: #0f172a;
+    .placeholder-card .lead {
+      color: rgba(255, 255, 255, 0.82);
     }
-
-    .giving-shell p {
-      color: #475569;
-      margin-bottom: 1.5rem;
-    }
-
-    .giving-form {
-      display: grid;
-      gap: 1.2rem;
-    }
-
-    .field {
-      display: grid;
-      gap: 0.5rem;
-    }
-
-    .field label {
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .field input {
-      width: 100%;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 0.9rem 1rem;
-      font: inherit;
-      color: #0f172a;
-      background: #fff;
-    }
-
-    .field input:focus {
-      outline: 2px solid rgba(234, 179, 8, 0.35);
-      border-color: #d4a216;
-    }
-
-    .form-message {
-      min-height: 1.5rem;
-      font-size: 0.95rem;
-      margin: 0;
-      font-weight: 600;
-    }
-
-    .giving-actions {
-      display: flex;
-      justify-content: flex-start;
-      margin-top: 0.75rem;
-    }
-
-    @media (max-width: 640px) {
-      .giving-shell {
-        padding: 1.3rem;
-      }
+    .placeholder-card .eyebrow {
+      color: #e8ce7b;
     }
   </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
-
   <header class="navbar" id="navbar">
     <div class="navbar__inner">
       <a href="index.html" class="navbar__brand" aria-label="Torchbearers Kingdom Movement home">
@@ -108,7 +47,6 @@
         </span>
         <span class="navbar__wordmark">TKM<span class="navbar__wordmark-sub">Torchbearers Kingdom Movement</span></span>
       </a>
-
       <nav class="navbar__nav" id="primaryNav" aria-label="Primary">
         <ul class="navbar__list">
           <li><a href="about.html">About</a></li>
@@ -120,16 +58,12 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-
       <div class="navbar__actions">
         <a href="donate.html" class="btn btn--ghost-light">Give</a>
         <a href="https://wa.me/?text=Hello%2C%20I%20would%20like%20to%20join%20the%20movement." class="btn btn--gold" target="_blank" rel="noopener noreferrer">Join Us</a>
-        <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-          <span></span><span></span><span></span>
-        </button>
+        <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
       </div>
     </div>
-
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="about.html">About</a></li>
@@ -138,34 +72,28 @@
         <li><a href="events.html">Events</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="prayer.html">Prayer</a></li>
+        <li><a href="resources.html">Resources</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      <div class="mobile-menu__actions">
+        <a href="donate.html" class="btn btn--ghost-light">Give</a>
+        <a href="https://wa.me/?text=Hello%2C%20I%20would%20like%20to%20join%20the%20movement." class="btn btn--gold" target="_blank" rel="noopener noreferrer">Join Us</a>
+      </div>
     </div>
   </header>
 
-  <main id="main-content" class="giving-page">
-    <section class="giving-shell reveal" data-reveal>
-      <p class="eyebrow">Give</p>
-      <h1>Support the movement</h1>
-      <p>Thank you for partnering with us to advance the Kingdom of God through prayer, discipleship, and outreach.</p>
-
-      <form id="givingForm" class="giving-form" novalidate>
-        <div class="field">
-          <label for="givingName">Full name</label>
-          <input id="givingName" name="name" type="text" placeholder="Your full name" required>
+  <main id="main-content">
+    <section class="section" aria-labelledby="resources-page-coming-soon-title">
+      <div class="container" style="padding-top: 8rem; max-width: 760px;">
+        <div class="glass-card placeholder-card" style="padding: 3rem 2rem; text-align: center; border-radius: 24px;">
+          <p class="eyebrow eyebrow--dark">Resources</p>
+          <h1 id="resources-page-coming-soon-title">Coming soon</h1>
+          <p class="lead">This resources page is currently under construction. Helpful materials and teachings will be added here soon.</p>
+          <div class="hero__actions" style="justify-content: center; margin-top: 1.5rem;">
+            <a href="index.html" class="btn btn--gold">Back to Home</a>
+          </div>
         </div>
-
-        <div class="field">
-          <label for="givingContact">Contact</label>
-          <input id="givingContact" name="contact" type="email" placeholder="Email address" required>
-        </div>
-
-        <p id="givingFormMessage" class="form-message" aria-live="polite"></p>
-
-        <div class="giving-actions">
-          <button type="submit" class="btn btn--gold">Give</button>
-        </div>
-      </form>
+      </div>
     </section>
   </main>
 
@@ -175,7 +103,6 @@
         <span class="navbar__wordmark navbar__wordmark--footer">TKM</span>
         <p>Torchbearers Kingdom Movement — bringing godly and spiritual enlightenment to this generation and beyond.</p>
       </div>
-
       <nav class="footer__col" aria-label="Explore">
         <p class="footer__heading">Explore</p>
         <a href="about.html">About</a>
@@ -183,10 +110,9 @@
         <a href="mountains.html">Seven Mountains</a>
         <a href="education.html">Education</a>
       </nav>
-
       <nav class="footer__col" aria-label="Get Involved">
         <p class="footer__heading">Get Involved</p>
-        <a href="#" target="_blank" rel="noopener noreferrer" data-whatsapp-main data-whatsapp-text="Hello, I would like to join the movement.">Join the Movement</a>
+        <a href="partner.html">Partner</a>
         <a href="prayer.html">Prayer Requests</a>
         <a href="contact.html">Contact</a>
       </nav>
@@ -195,7 +121,5 @@
 
   <script src="js/navbar.js"></script>
   <script src="js/animations.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="js/app.js"></script>
 </body>
 </html>
