@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resources | Torchbearers Kingdom Movement</title>
-  <meta name="description" content="Resources page coming soon for Torchbearers Kingdom Movement.">
+  <meta name="description" content="Explore books and resources from Torchbearers Kingdom Movement.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,23 +17,80 @@
     body {
       background: linear-gradient(180deg, #edf3fb 0%, #f4f7fb 100%);
     }
-    .placeholder-card {
-      background: linear-gradient(160deg, rgba(8, 14, 25, 0.96), rgba(21, 32, 55, 0.96));
-      border: 1px solid rgba(212, 175, 55, 0.28);
-      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
-      color: #ffffff;
+    .resources-section { padding-top: 9rem; }
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      align-items: stretch;
     }
-    .placeholder-card .eyebrow,
-    .placeholder-card h1,
-    .placeholder-card .lead,
-    .placeholder-card .btn {
-      color: inherit;
+    .book-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      background: linear-gradient(160deg, rgba(255,255,255,.96), rgba(232,238,248,.92));
+      border: 1px solid rgba(15, 23, 42, .1);
+      border-radius: 24px;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, .12);
     }
-    .placeholder-card .lead {
-      color: rgba(255, 255, 255, 0.82);
+    .book-card__art {
+      margin: 0 0 1.5rem;
     }
-    .placeholder-card .eyebrow {
-      color: #e8ce7b;
+    .book-card__cover {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: scale-down;
+    }
+    .book-card__details { display: flex; flex: 1; flex-direction: column; align-items: flex-start; }
+    .book-card__details h2 { font-size: clamp(1.6rem, 2.4vw, 2.1rem); }
+    .book-card__description { color: #475569; }
+    .book-card__details .btn { width: 100%; }
+    .book-dialog {
+      width: min(92vw, 480px);
+      max-height: 90vh;
+      padding: 0;
+      border: 0;
+      border-radius: 20px;
+      color: #0f172a;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
+    }
+    .book-dialog::backdrop { background: rgba(7, 11, 20, .72); backdrop-filter: blur(4px); }
+    .book-dialog__content { position: relative; padding: 2rem; }
+    .book-dialog__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      border: 0;
+      background: transparent;
+      color: #475569;
+      font: inherit;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .book-form { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .book-form__field { display: grid; gap: .4rem; }
+    .book-form__field label { font-weight: 700; }
+    .book-form__field input {
+      width: 100%;
+      padding: .85rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font: inherit;
+    }
+    .book-form__field input:focus { outline: 2px solid rgba(212, 175, 55, .45); border-color: #b18e1d; }
+    .book-form__error, .book-form__message { min-height: 1.2em; margin: 0; color: #b42318; font-size: .875rem; }
+    .book-form__message { font-weight: 700; }
+    .book-form [aria-invalid="true"] { border-color: #b42318; }
+    .book-form button:disabled { cursor: wait; opacity: .7; transform: none; }
+    @media (max-width: 640px) {
+      .resources-section { padding-top: 7rem; }
+      .books-grid { grid-template-columns: 1fr; }
+      .book-dialog__content { padding: 1.5rem; }
+    }
+    @media (min-width: 641px) and (max-width: 960px) {
+      .books-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -51,7 +108,7 @@
         <ul class="navbar__list">
           <li><a href="about.html">About</a></li>
           <li><a href="mountains.html">Seven Mountains</a></li>
-          <li><a href="sermons.html">Resources</a></li>
+          <li><a href="resources.html">Resources</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="prayer.html">Prayer</a></li>
@@ -68,11 +125,10 @@
       <ul>
         <li><a href="about.html">About</a></li>
         <li><a href="mountains.html">Seven Mountains</a></li>
-        <li><a href="sermons.html">Resources</a></li>
+        <li><a href="resources.html">Resources</a></li>
         <li><a href="events.html">Events</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="prayer.html">Prayer</a></li>
-        <li><a href="resources.html">Resources</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="mobile-menu__actions">
@@ -83,19 +139,74 @@
   </header>
 
   <main id="main-content">
-    <section class="section" aria-labelledby="resources-page-coming-soon-title">
-      <div class="container" style="padding-top: 8rem; max-width: 760px;">
-        <div class="glass-card placeholder-card" style="padding: 3rem 2rem; text-align: center; border-radius: 24px;">
+    <section class="section resources-section" aria-labelledby="resources-page-title">
+      <div class="container">
+        <div class="section-head">
           <p class="eyebrow eyebrow--dark">Resources</p>
-          <h1 id="resources-page-coming-soon-title">Coming soon</h1>
-          <p class="lead">This resources page is currently under construction. Helpful materials and teachings will be added here soon.</p>
-          <div class="hero__actions" style="justify-content: center; margin-top: 1.5rem;">
-            <a href="index.html" class="btn btn--gold">Back to Home</a>
-          </div>
+          <h1 id="resources-page-title">Books</h1>
+          <p class="lead">Practical resources to help you grow in your walk and calling.</p>
+        </div>
+        <div class="books-grid">
+          <article class="book-card" aria-labelledby="seersCodeTitle">
+            <figure class="book-card__art">
+              <img class="book-card__cover" src="files/seer's_code.jpeg" alt="The Seer's Code eBook cover">
+            </figure>
+            <div class="book-card__details">
+              <p class="eyebrow eyebrow--dark">eBook · PDF</p>
+              <h2 id="seersCodeTitle">The Seer's Code</h2>
+              <p class="book-card__description">From Blind Eyes to Eagle Eyes. A practical training guide to spiritual sight, discernment, consecration, prayer, and prophetic development.</p>
+              <button type="button" class="btn btn--gold" data-book-id="seers-code" data-book-title="The Seer's Code">Get this book</button>
+            </div>
+          </article>
+          <article class="book-card" aria-labelledby="colourCodeTitle">
+            <figure class="book-card__art">
+              <img class="book-card__cover" src="files/color_book.jpeg" alt="The Colour Code Manual eBook cover">
+            </figure>
+            <div class="book-card__details">
+              <p class="eyebrow eyebrow--dark">eBook · PDF</p>
+              <h2 id="colourCodeTitle">The Colour Code Manual</h2>
+              <p class="book-card__description">From Blind Eyes to Eagle Eyes. A practical training guide to spiritual sight, discernment, consecration, prayer, and prophetic development.</p>
+              <button type="button" class="btn btn--gold" data-book-id="colour-code-manual" data-book-title="The Colour Code Manual">Get this book</button>
+            </div>
+          </article>
+          <article class="book-card" aria-labelledby="codeBreakingTitle">
+            <figure class="book-card__art">
+              <img class="book-card__cover" src="files/code_book.jpeg" alt="The Code That Breaks the African Curse eBook cover">
+            </figure>
+            <div class="book-card__details">
+              <p class="eyebrow eyebrow--dark">eBook · PDF</p>
+              <h2 id="codeBreakingTitle">The Code That Breaks the African Curse</h2>
+              <p class="book-card__description">From Blind Eyes to Eagle Eyes. A practical training guide to spiritual sight, discernment, consecration, prayer, and prophetic development.</p>
+              <button type="button" class="btn btn--gold" data-book-id="code-breaks-african-curse" data-book-title="The Code That Breaks the African Curse">Get this book</button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
   </main>
+
+  <dialog class="book-dialog" id="bookDialog" aria-labelledby="bookDialogTitle">
+    <div class="book-dialog__content">
+      <button class="book-dialog__close" type="button" id="closeBookForm" aria-label="Close purchase form">&times;</button>
+      <p class="eyebrow eyebrow--dark">Secure checkout</p>
+      <h2 id="bookDialogTitle">Get this book</h2>
+      <p>Enter your details to continue to Paystack checkout.</p>
+      <form class="book-form" id="bookPurchaseForm" novalidate>
+        <div class="book-form__field">
+          <label for="buyerName">Full name</label>
+          <input id="buyerName" name="name" type="text" autocomplete="name" required maxlength="150" aria-describedby="buyerNameError">
+          <p class="book-form__error" id="buyerNameError"></p>
+        </div>
+        <div class="book-form__field">
+          <label for="buyerEmail">Email address</label>
+          <input id="buyerEmail" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="buyerEmailError">
+          <p class="book-form__error" id="buyerEmailError"></p>
+        </div>
+        <p class="book-form__message" id="bookFormMessage" role="status" aria-live="polite"></p>
+        <button class="btn btn--gold" type="submit" id="bookSubmitButton">Continue to payment</button>
+      </form>
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <div class="container footer__grid">
@@ -121,5 +232,103 @@
 
   <script src="js/navbar.js"></script>
   <script src="js/animations.js"></script>
+  <script>
+    (() => {
+      const dialog = document.getElementById('bookDialog');
+      const form = document.getElementById('bookPurchaseForm');
+      const nameInput = document.getElementById('buyerName');
+      const emailInput = document.getElementById('buyerEmail');
+      const nameError = document.getElementById('buyerNameError');
+      const emailError = document.getElementById('buyerEmailError');
+      const formMessage = document.getElementById('bookFormMessage');
+      const submitButton = document.getElementById('bookSubmitButton');
+      const dialogTitle = document.getElementById('bookDialogTitle');
+      const initialButtonLabel = submitButton.textContent;
+      let selectedBookId = '';
+
+      document.querySelectorAll('[data-book-id]').forEach((button) => {
+        button.addEventListener('click', () => {
+          selectedBookId = button.dataset.bookId;
+          dialogTitle.textContent = `Get ${button.dataset.bookTitle}`;
+          formMessage.textContent = '';
+          dialog.showModal();
+          nameInput.focus();
+        });
+      });
+      document.getElementById('closeBookForm').addEventListener('click', () => dialog.close());
+
+      function validateName() {
+        const valid = nameInput.value.trim().length > 0;
+        nameError.textContent = valid ? '' : 'Please enter your full name.';
+        nameInput.setAttribute('aria-invalid', String(!valid));
+        return valid;
+      }
+
+      function validateEmail() {
+        const email = emailInput.value.trim();
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        emailError.textContent = valid ? '' : 'Please enter a valid email address.';
+        emailInput.setAttribute('aria-invalid', String(!valid));
+        return valid;
+      }
+
+      nameInput.addEventListener('blur', validateName);
+      emailInput.addEventListener('blur', validateEmail);
+      nameInput.addEventListener('input', () => {
+        if (nameInput.getAttribute('aria-invalid') === 'true') validateName();
+      });
+      emailInput.addEventListener('input', () => {
+        if (emailInput.getAttribute('aria-invalid') === 'true') validateEmail();
+      });
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        formMessage.textContent = '';
+        formMessage.style.color = '';
+        const nameIsValid = validateName();
+        const emailIsValid = validateEmail();
+        const isValid = nameIsValid && emailIsValid;
+        if (!isValid) {
+          form.querySelector('[aria-invalid="true"]').focus();
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Preparing checkout…';
+        try {
+          const response = await fetch('/.netlify/functions/book-checkout-initialize', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: nameInput.value.trim(),
+              email: emailInput.value.trim(),
+              bookId: selectedBookId
+            })
+          });
+          let result;
+          try {
+            result = await response.json();
+          } catch (error) {
+            throw new Error('Unable to read the checkout response. Please try again.');
+          }
+          if (!response.ok) throw new Error(result.error || 'Unable to start checkout. Please try again.');
+
+          if (typeof result.url !== 'string') {
+            throw new Error('The checkout link was invalid. Please try again.');
+          }
+          const checkoutUrl = new URL(result.url);
+          if (checkoutUrl.protocol !== 'https:' || checkoutUrl.hostname !== 'checkout.paystack.com') {
+            throw new Error('The checkout link was invalid. Please try again.');
+          }
+          window.location.assign(checkoutUrl.href);
+        } catch (error) {
+          formMessage.style.color = '#b42318';
+          formMessage.textContent = error instanceof Error ? error.message : 'Unable to start checkout. Please try again.';
+          submitButton.disabled = false;
+          submitButton.textContent = initialButtonLabel;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

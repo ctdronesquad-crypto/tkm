@@ -113,7 +113,7 @@
         <ul class="navbar__list">
           <li><a href="about.html">About</a></li>
           <li><a href="mountains.html">Seven Mountains</a></li>
-          <li><a href="sermons.html">Resources</a></li>
+          <li><a href="resources.html">Resources</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="prayer.html">Prayer</a></li>
@@ -134,7 +134,7 @@
       <ul>
         <li><a href="about.html">About</a></li>
         <li><a href="mountains.html">Seven Mountains</a></li>
-        <li><a href="sermons.html">Resources</a></li>
+        <li><a href="resources.html">Resources</a></li>
         <li><a href="events.html">Events</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="prayer.html">Prayer</a></li>
@@ -160,10 +160,15 @@
           <input id="givingContact" name="contact" type="email" placeholder="Email address" required>
         </div>
 
+        <div class="field">
+          <label for="givingAmount">Donation amount (GHS)</label>
+          <input id="givingAmount" name="amount" type="number" min="1" step="0.01" inputmode="decimal" placeholder="e.g. 50.00" required>
+        </div>
+
         <p id="givingFormMessage" class="form-message" aria-live="polite"></p>
 
         <div class="giving-actions">
-          <button type="submit" class="btn btn--gold">Give</button>
+          <button type="submit" class="btn btn--gold">Continue to payment</button>
         </div>
       </form>
     </section>
@@ -197,5 +202,6 @@
   <script src="js/animations.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/donate.js"></script>
 </body>
 </html>

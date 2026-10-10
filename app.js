@@ -6,6 +6,72 @@
    ========================================================= */
 (function () {
 
+  /* =========================================================
+     EMAILJS — auto-reply confirmations sent to form submitters
+     =========================================================
+     Fill in your own values from the EmailJS dashboard:
+     Account -> General (Public Key) and Email Services / Templates
+     (Service ID, Template ID). The Public Key is safe to expose in
+     client-side code by design — EmailJS is built for this.
+     ========================================================= */
+  const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+  const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+  if (window.emailjs && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+
+  // Default "custom_note" copy per form type — matches the {{custom_note}}
+  // variable in the auto-reply.html template. Add an entry here whenever
+  // a new form is built (e.g. Join, Volunteer).
+  const AUTO_REPLY_NOTES = {
+    contact: "A member of our team will respond to your message within 1-2 business days.",
+    join: "Welcome to the movement! Someone from our team will reach out with next steps shortly.",
+    prayer: "A member of our prayer team will be reaching out personally within 48 hours.",
+    newsletter: "You're now set to receive sermons, events, and Kingdom teaching in your inbox."
+  };
+
+  const FORM_TYPE_LABELS = {
+    contact: 'Contact',
+    join: 'Join the Movement',
+    prayer: 'Prayer Request',
+    newsletter: 'Newsletter Signup'
+  };
+
+  /**
+   * Sends a branded auto-reply confirmation to whoever submitted a form.
+   * This is separate from (and in addition to) the admin notification
+   * email sent server-side via the Netlify function + Resend.
+   *
+   * @param {Object} params
+   * @param {string} params.name       - submitter's name
+   * @param {string} params.email      - submitter's email
+   * @param {string} params.formType   - 'contact' | 'join' | 'prayer' | 'newsletter'
+   * @returns {Promise} resolves/rejects based on the EmailJS send result
+   */
+  function sendAutoReply({ name, email, formType }) {
+    if (!window.emailjs || EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+      // EmailJS not configured yet — fail silently so forms still work
+      // while setup is in progress. Swap in real keys above to activate.
+      console.warn('EmailJS not configured yet; skipping auto-reply email.');
+      return Promise.resolve();
+    }
+
+    return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_name: name || 'Friend',
+      to_email: email,
+      form_type: FORM_TYPE_LABELS[formType] || 'Website',
+      custom_note: AUTO_REPLY_NOTES[formType] || ''
+    });
+  }
+
+  // Exposed globally so donate.js and future form pages (Join, Contact,
+  // Prayer Request) can call TKM.sendAutoReply(...) without duplicating
+  // this setup on every page.
+  window.TKM = window.TKM || {};
+  window.TKM.sendAutoReply = sendAutoReply;
+
   /* ---- Scroll progress bar ---- */
   const scrollProgress = document.getElementById('scrollProgress');
   function updateScrollProgress() {
@@ -89,6 +155,16 @@
         });
 
         if (!response.ok) throw new Error('Request failed');
+
+        // Admin notification (Resend) succeeded. Fire the auto-reply to the
+        // subscriber too. This is intentionally non-blocking for the UI —
+        // if EmailJS has a hiccup, the subscription itself still succeeded,
+        // so we don't want to show an error for what's really a nice-to-have.
+        window.TKM.sendAutoReply({
+          name: 'Friend',
+          email,
+          formType: 'newsletter'
+        }).catch((err) => console.warn('Auto-reply email failed:', err));
 
         newsletterMessage.textContent = "You're subscribed. Welcome to the movement.";
         newsletterMessage.style.color = '';

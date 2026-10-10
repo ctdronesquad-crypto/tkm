@@ -299,12 +299,6 @@
       validate: ({ name, email, message }) => !!name && !!email && !!message
     },
     {
-      form: document.getElementById('givingForm'),
-      formType: 'give',
-      successMessage: 'Thank you. We have received your giving enquiry and a confirmation email has been sent to your contact email.',
-      validate: ({ name, email }) => !!name && !!email
-    },
-    {
       form: document.getElementById('eventRegistrationForm'),
       formType: 'event',
       successMessage: 'Thank you. Your registration has been received and a confirmation email has been sent to you.',

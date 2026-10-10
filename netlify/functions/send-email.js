@@ -13,6 +13,18 @@ const RECIPIENTS = {
 
 const FROM_ADDRESS = process.env.FROM_ADDRESS || 'TKM Website <onboarding@resend.dev>';
 
+function getResendConfigError() {
+  if (!process.env.RESEND_API_KEY) {
+    return 'Missing RESEND_API_KEY in Netlify environment variables.';
+  }
+
+  if (!process.env.FROM_ADDRESS) {
+    return 'Missing FROM_ADDRESS in Netlify environment variables. Using onboarding@resend.dev only works in Resend test mode.';
+  }
+
+  return null;
+}
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -68,6 +80,14 @@ exports.handler = async (event) => {
     return {
       statusCode: 400,
       body: JSON.stringify({ error: 'Name is required.' })
+    };
+  }
+
+  const configError = getResendConfigError();
+  if (configError) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: configError })
     };
   }
 
